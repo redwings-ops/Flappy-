@@ -11,7 +11,7 @@ const selectSound = new Audio("assets/select.mp3");
 
 // Load images
 const bgImg = new Image();
-bgImg.src = "assets/bg.png";
+bgImg.src = "assets/vtu.png";
 
 const pipeImg = new Image();
 pipeImg.src = "assets/pipe.png";
