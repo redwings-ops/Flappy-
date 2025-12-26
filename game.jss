@@ -11,10 +11,10 @@ const selectSound = new Audio("assets/select.mp3");
 
 // Load images
 const bgImg = new Image();
-bgImg.src = "assets/vtu.jpeg";
+bgImg.src = "assets/vtu.png";
 
 const pipeImg = new Image();
-pipeImg.src = "assets/pipe.png.jpg";
+pipeImg.src = "assets/pipe.png.png";
 
 let playerImg = new Image();
 
