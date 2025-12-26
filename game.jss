@@ -14,7 +14,7 @@ const bgImg = new Image();
 bgImg.src = "assets/vtu.jpeg";
 
 const pipeImg = new Image();
-pipeImg.src = "assets/pipe.png";
+pipeImg.src = "assets/pipe.png.jpg";
 
 let playerImg = new Image();
 
