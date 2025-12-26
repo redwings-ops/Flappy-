@@ -11,14 +11,12 @@ const selectSound = new Audio("assets/select.mp3");
 
 // Load images
 const bgImg = new Image();
-bgImg.src = "assets/vtu.png";
+bgImg.src = "assets/bg.png";
 
 const pipeImg = new Image();
-pipeImg.src = "assets/pipe.png.png";
+pipeImg.src = "assets/pipe.png";
 
 let playerImg = new Image();
-
-// Player setup
 let player = {
     x: 120,
     y: 200,
@@ -30,9 +28,8 @@ let player = {
 let gravity = 0.4;
 let pipes = [];
 let gap = 240;
-let bgX = 0; // For background movement
+let bgX = 0;
 
-// Character selection
 document.querySelectorAll(".char").forEach(img => {
     img.onclick = () => {
         let id = img.dataset.id;
@@ -47,8 +44,14 @@ document.querySelectorAll(".char").forEach(img => {
 });
 
 function startGame() {
-    document.addEventListener("keydown", jump);
-    document.addEventListener("touchstart", jump);
+    document.addEventListener("keydown", () => {
+        player.velocity = -9;
+        jumpSound.play();
+    });
+    document.addEventListener("touchstart", () => {
+        player.velocity = -9;
+        jumpSound.play();
+    });
 
     setInterval(() => {
         let topHeight = Math.random() * (canvas.height - gap - 200) + 80;
@@ -62,34 +65,24 @@ function startGame() {
     requestAnimationFrame(update);
 }
 
-function jump() {
-    player.velocity = -9;
-    jumpSound.play();
-}
-
 function update() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Scroll background
     bgX -= 2;
     if (bgX <= -canvas.width) bgX = 0;
-
     ctx.drawImage(bgImg, bgX, 0, canvas.width, canvas.height);
     ctx.drawImage(bgImg, bgX + canvas.width, 0, canvas.width, canvas.height);
 
-    // Player animation
     player.velocity += gravity;
     player.y += player.velocity;
     ctx.drawImage(playerImg, player.x, player.y, player.width, player.height);
 
-    // Pipes movement and collision
-    pipes.forEach(p => {
+    pipes.forEach((p, i) => {
         p.x -= 4;
         ctx.drawImage(pipeImg, p.x, 0, 100, p.top);
         ctx.drawImage(pipeImg, p.x, p.bottom, 100, canvas.height - p.bottom);
 
-        if (
-            player.x + player.width > p.x &&
+        if (player.x + player.width > p.x &&
             player.x < p.x + 100 &&
             (player.y < p.top || player.y + player.height > p.bottom)
         ) {
@@ -106,4 +99,4 @@ function update() {
     }
 
     requestAnimationFrame(update);
-                  }
+}
